@@ -1,10 +1,18 @@
 function add(numbers) {
-  const delimiter = [",", "\n"];
+  let delimiters = [",", "\n"];
+ 
   if (!numbers) return 0;
 
   if (numbers.length === 1) return Number(numbers);
 
-  const splitNumbers = splitByDelimiters(numbers, delimiter);
+  if (numbers.startsWith("//")) {
+    const parts = numbers.split("\n");
+    delimiters = [parts[0].slice(2)];
+    numbers = parts.slice(1).join("\n");
+  }
+
+  const splitNumbers = splitByDelimiters(numbers, delimiters);
+
   return splitNumbers.reduce(
     (accumulator, number) => accumulator + Number(number),
     0
