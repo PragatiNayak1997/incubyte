@@ -7,7 +7,16 @@ function add(numbers) {
 
   if (numbers.startsWith("//")) {
     const parts = numbers.split("\n");
-    delimiters = [parts[0].slice(2)];
+    const delimiterDeclaration = parts[0].slice(2);
+
+    if (delimiterDeclaration.startsWith("[") && delimiterDeclaration.endsWith("]")) {
+      // Handle delimiters of any length (e.g., [***])
+      delimiters = [delimiterDeclaration.slice(1, -1)];
+    } else {
+      // Handle single-character delimiters
+      delimiters = [delimiterDeclaration];
+    }
+
     numbers = parts.slice(1).join("\n");
   }
 
