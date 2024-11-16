@@ -19,7 +19,7 @@ function add(numbers) {
     throw new Error(`negative numbers not allowed: ${negatives.join(", ")}`);
   }
 
-  return splitNumbers.reduce(
+  return splitNumbers.filter(num => num<=1000).reduce(
     (accumulator, number) => accumulator + Number(number),
     0
   );
