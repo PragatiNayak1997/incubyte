@@ -1,6 +1,6 @@
 function add(numbers) {
   let delimiters = [",", "\n"];
- 
+
   if (!numbers) return 0;
 
   if (numbers.length === 1) return Number(numbers);
@@ -12,6 +12,12 @@ function add(numbers) {
   }
 
   const splitNumbers = splitByDelimiters(numbers, delimiters);
+
+  const negatives = splitNumbers.filter((num) => num < 0);
+
+  if (negatives.length) {
+    throw new Error(`negative numbers not allowed: ${negatives.join(", ")}`);
+  }
 
   return splitNumbers.reduce(
     (accumulator, number) => accumulator + Number(number),
